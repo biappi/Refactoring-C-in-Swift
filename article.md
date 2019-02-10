@@ -424,3 +424,11 @@ and again, it is trivial to add the missing fields.
 To my welcome surprise, this was all that was necessary to build our
 codebase!
 
+
+## Using Xcode to check progress
+
+As clang helped us with understanding how to build the code, so did Xcode
+in helping check our progress, so it's only fair I share the workflow i
+used.
+
+![Main View](https://gist.githubusercontent.com/biappi/44b3627fc98358a56677aceb8102201e/raw/fc9372f4fae8c119647ca88f028b0297b1adb2ca/main-view.png)
