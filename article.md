@@ -213,4 +213,19 @@ will do just fine for now.
 
 And here's a familiar starting point, our default Hello World template.
 
+As the last "administration" task, let's fork the original upstream repo
+and do all the favorite git gymnastic, and pronto, we can push to our
+forked repo.
+
+    willy@Thala  tabboz master$ git push
+    Counting objects: 2, done.
+    Delta compression using up to 8 threads.
+    Compressing objects: 100% (2/2), done.
+    Writing objects: 100% (2/2), 239 bytes | 239.00 KiB/s, done.
+    Total 2 (delta 1), reused 0 (delta 0)
+    remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+    To https://github.com/biappi/Tabboz-Simulator.git
+       f0c4b93..420c8e0  master -> master
+    willy@Thala  tabboz master$ git lg
+
 
