@@ -174,3 +174,43 @@ If that's the fuzzy goal, our first plan is almost forced: we need to get
 the codebase to compile, maybe link, with any means necessary. Then,
 optimistically, future us will be closer to a fuzzy goal.
 
+
+Project Scaffolding
+===================
+
+It is good form, if overkill for this exercise, also because upstream
+looks like a "dead" dumped artifact, so:
+
+    willy@Thala  tabboz master$ git tag original
+
+It is a Swift naming convention that namespaces like `class`, `struct`,
+and `enum` are capitalized, so I believe it follows that other namespaces
+like files and directories should be named accordingly.
+
+This means we're going to change the directory structure that's served
+so well in all those years to something that's more conventional in its
+new home.
+
+Let's archive it in a folder and keep it there as a source to cherry-pick
+the files we will use.
+
+    willy@Thala  tabboz master$ mkdir Original
+    willy@Thala  tabboz master$ mv * Original/
+    willy@Thala  tabboz master$ git add .
+    willy@Thala  tabboz master$ git commit -m'Archiving original source'
+
+Finally opening Xcode, let's create a new project: macOS, Command Line Tool
+will do just fine for now.
+
+    willy@Thala  tabboz master$ git commit -m'Adding Xcode project'
+    [master 9d51fee] Adding Xcode project
+     4 files changed, 315 insertions(+)
+     create mode 100644 Tabboz Simulator.xcodeproj/project.pbxproj
+     create mode 100644 Tabboz Simulator.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+     create mode 100644 Tabboz Simulator.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+     create mode 100644 Tabboz Simulator/main.swift
+    willy@Thala  tabboz master$ 
+
+And here's a familiar starting point, our default Hello World template.
+
+
