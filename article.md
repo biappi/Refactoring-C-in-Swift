@@ -228,4 +228,6 @@ forked repo.
        f0c4b93..420c8e0  master -> master
     willy@Thala  tabboz master$ git lg
 
+This, of course, means that the repository I am going to work with is
+going to be at: https://github.com/biappi/Tabboz-Simulator
 
