@@ -505,3 +505,9 @@ Tabboz might now crash, but we are actually running it from Swift, and
 this is a much welcome and ironic sight:
 
 ![Ironic sight](https://gist.github.com/biappi/44b3627fc98358a56677aceb8102201e/raw/2273dfd909569fcbe271c851cbdb04a60ee88e0a/irony.png)
+
+    willy@Thala  tabboz master$ git commit -am'Calling main entrypoint'
+    [master 5dfcd7e] Calling main entrypoint
+     7 files changed, 14 insertions(+), 8 deletions(-)
+    willy@Thala  tabboz master$
+
