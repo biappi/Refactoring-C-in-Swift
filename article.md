@@ -140,3 +140,37 @@ use what language for what filename, function or variable name, ask your
 nearest multi-lingual coder friend about it!
 
 
+Tools of the trade, and plan of action
+======================================
+
+Some disagree, but I belive that the advantages of using an IDE fairly
+outweight the lack of "integration" of using separate tools, especially
+in a code refactoring excercise like the one at hand, in which we'll have
+to quickly wrangle the creation of a build system, bridging between two
+languages, and troubleshooting building and linking errors.
+
+The obvious choice falls on the first-party Xcode, which is excellent and
+free. With excuses to people who not have access to Xcode, but the
+knowledge required to troubleshoot an installation of a Swift runtime
+can overlap to the knowledge of translating what the IDE will do under
+the hood.
+
+So, let's finally begin for real by addressing one of the elephants in the
+room. This is a Windows application, I do not have access to a runtime
+to test the build, nor a build environment to try and build the default
+configuration.
+
+This might be a crazy idea, but a cursory look at the files show that
+the content of the files look exactly like their directory structure:
+very well made, very understandable, no "middleman" layers of
+abstractions, again a testament of how much simplicity always pays off,
+and kind of a lost art, as one would cynically say.
+
+For now, we can envision a fuzzy goal of a text based version of the game,
+or maybe a more generic abstraction of the game logic, written somewhat
+in Swift.
+
+If that's the fuzzy goal, our first plan is almost forced: we need to get
+the codebase to compile, maybe link, with any means necessary. Then,
+optimistically, future us will be closer to a fuzzy goal.
+
