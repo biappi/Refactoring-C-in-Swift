@@ -447,13 +447,13 @@ highlighted. To let clang continue emitting errors, we will use the
 
 So, let's try and reconstruct the `OPENFILENAME` struct.
 
-    1. Change the define from an int to an empty struct
-    2. Build
-    3. Notice the build errors on the left, option-click to reveal
-       the error in the assistant pane
+  1. Change the define from an int to an empty struct
+  2. Build
+  3. Notice the build errors on the left, option-click to reveal
+     the error in the assistant pane
 
        ![Build Errors](https://gist.githubusercontent.com/biappi/44b3627fc98358a56677aceb8102201e/raw/79502cd967b9e6471c92d4f8bde9b9b5f68259c8/struct.png)
 
-    4. Copy and paste the fields from the call-site to the declaration site
-    5. Use whatever means of text editing (I suggest multi-cursors in this
-       case) to fix the syntax.
+  4. Copy and paste the fields from the call-site to the declaration site
+  5. Use whatever means of text editing (I suggest multi-cursors in this
+     case) to fix the syntax.
