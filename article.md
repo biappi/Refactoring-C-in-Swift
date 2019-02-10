@@ -480,3 +480,28 @@ the many parts of Xcode, or, for example, clang-format if one so desire.
      create mode 100644 Tabboz Simulator/stubs.c
     willy@Thala  tabboz master$
 
+## Finally, Swift
+
+We are finally ready to start playing with Swift, five hundred lines into
+this article.
+
+Not before we find a curious beast of `WinMain`, and a few fixes
+to accomodate this new find into the codebase, we can add this into
+our bridging header:
+
+    #import "os.h"
+    #import "zarrosim.h"
+
+such that, as silly as it sounds, we can write in our `main.swift`:
+
+    WinMain(0, 0, 0, 0)
+
+And that's how the Swift C Inter-Operability works, almost by magic. If the
+code we would be calling to would actually be proper C, our work could be
+near completion, as it is tremendously easy to explore the way Swift
+exposes C APIs using the Xcode editor autocomplete feature.
+
+Tabboz might now crash, but we are actually running it from Swift, and
+this is a much welcome and ironic sight:
+
+![Ironic sight](https://gist.github.com/biappi/44b3627fc98358a56677aceb8102201e/raw/2273dfd909569fcbe271c851cbdb04a60ee88e0a/irony.png)
