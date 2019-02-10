@@ -231,3 +231,73 @@ forked repo.
 This, of course, means that the repository I am going to work with is
 going to be at: https://github.com/biappi/Tabboz-Simulator
 
+
+Importing the C Files
+=====================
+
+In Xcode import a C implementation file into a group, this is one way to
+create a bridging header.
+
+From the point of view of a C programmer, this header is a C file the
+resulting object will be part of an imaginary translation unit spanning
+the entire Swift program. For a Swift programmer, it is the file used to
+import C and Objective-C libraries to be used in Swift.
+
+I will continue mechanically importing all the C files in Xcode, resisting
+the temptation of cherry-picking only the business-logic files, as this
+will present to the Xcode indexer a better view of the code.
+
+    willy@Thala  tabboz master$ git commit -am'Adding C files'
+    [master 83cda99] Adding C files
+     22 files changed, 9125 insertions(+)
+     create mode 100644 Tabboz Simulator/C/Tabboz Simulator-Bridging-Header.h
+     create mode 100644 Tabboz Simulator/C/disco.c
+     create mode 100644 Tabboz Simulator/C/eventi.c
+     create mode 100644 Tabboz Simulator/C/lavoro.c
+     create mode 100644 Tabboz Simulator/C/net.c
+     create mode 100644 Tabboz Simulator/C/net.h
+     create mode 100644 Tabboz Simulator/C/newproteggi.c
+     create mode 100644 Tabboz Simulator/C/os.h
+     create mode 100644 Tabboz Simulator/C/prompt.c
+     create mode 100644 Tabboz Simulator/C/proteggi.c
+     create mode 100644 Tabboz Simulator/C/readkey.c
+     create mode 100644 Tabboz Simulator/C/resource.h
+     create mode 100644 Tabboz Simulator/C/scooter.c
+     create mode 100644 Tabboz Simulator/C/scuola.c
+     create mode 100644 Tabboz Simulator/C/tabimg.c
+     create mode 100644 Tabboz Simulator/C/telefono.c
+     create mode 100644 Tabboz Simulator/C/tempo.c
+     create mode 100644 Tabboz Simulator/C/tipa.c
+     create mode 100644 Tabboz Simulator/C/vestiti.c
+     create mode 100644 Tabboz Simulator/C/zarrosim.c
+     create mode 100644 Tabboz Simulator/C/zarrosim.h
+    willy@Thala  tabboz master$ 
+
+After a build, the error is a single one, but quite dramatic:
+
+    fatal error: 'windows.h' file not found
+
+Since it seems to be included from the `os.h` file only, let's hijack
+it as our interface file. It was clearly its own intended use, even if
+the syntax errors in the `#ifdefs` betrays the fact it was probably never
+used.
+
+Taking it as an invite, not daunted by the task, and basking in nostalgia
+for `AMIGA` and `WIN_16`, let's jank the file.
+
+This is also a nice moment to check if the `General` >
+`Continue building after errors` preference is enabled in Xcode, as it
+will be useful during the whack-a-mole game of stubbing out the
+interface the application depends on.
+
+Yay, Xcode is now lighting with a glowing red "21 issues" mark. This is
+progress.
+
+    willy@Thala  tabboz master$ git commit -m'Removing windows.h' -a
+    [master 438fc11] Removing windows.h
+     1 file changed, 1 insertion(+), 52 deletions(-)
+     rewrite Tabboz Simulator/C/os.h (99%)
+    willy@Thala  tabboz master$
+
+
+
