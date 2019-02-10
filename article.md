@@ -457,3 +457,26 @@ So, let's try and reconstruct the `OPENFILENAME` struct.
   4. Copy and paste the fields from the call-site to the declaration site
   5. Use whatever means of text editing (I suggest multi-cursors in this
      case) to fix the syntax.
+
+## Fixing Linking Errors
+
+By simple text manipulations we can derive an empty `stubs.c`
+implementation, and we also fix the `extern` declarations in `os.h`.
+
+At last, build succeded.
+
+Of course, the resulting build product is functionally useless, but
+we finally reached a first milestone. Now that we can succesfully
+build an executable means that the codebase we are working on is
+fully machine readable.
+
+Just as up until now we mainly used compiler errors to explore the code
+base, now we can also use any tools that semantically deal with code, like
+the many parts of Xcode, or, for example, clang-format if one so desire.
+
+    willy@Thala  tabboz master$ git commit -am'First succesful build'
+    [master 0e40491] First succesful build
+     3 files changed, 90 insertions(+), 6 deletions(-)
+     create mode 100644 Tabboz Simulator/stubs.c
+    willy@Thala  tabboz master$
+
