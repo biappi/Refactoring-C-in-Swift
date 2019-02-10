@@ -140,8 +140,7 @@ use what language for what filename, function or variable name, ask your
 nearest multi-lingual coder friend about it!
 
 
-Tools of the trade, and plan of action
-======================================
+## Tools of the trade, and plan of action
 
 Some disagree, but I belive that the advantages of using an IDE fairly
 outweight the lack of "integration" of using separate tools, especially
@@ -175,8 +174,7 @@ the codebase to compile, maybe link, with any means necessary. Then,
 optimistically, future us will be closer to a fuzzy goal.
 
 
-Project Scaffolding
-===================
+## Project Scaffolding
 
 It is good form, if overkill for this exercise, also because upstream
 looks like a "dead" dumped artifact, so:
@@ -232,8 +230,7 @@ This, of course, means that the repository I am going to work with is
 going to be at: https://github.com/biappi/Tabboz-Simulator
 
 
-Importing the C Files
-=====================
+## Importing the C Files
 
 In Xcode import a C implementation file into a group, this is one way to
 create a bridging header.
@@ -300,4 +297,130 @@ progress.
     willy@Thala  tabboz master$
 
 
+## Fixing Compilation Errors
+
+The only thing remaining is making the code build, fixing a class of error
+at a time. This is, like the precedent, a pretty mechanical task familiar
+to many who ported codebases between different platforms.
+
+At this stage the brush is the broad one. Anything more than adding few
+typedefs, pound defines, and empty functions should be deferred to a later
+stage.
+
+This process has the advantage of not only resulting into a nice if
+useless build artifact, but also provides the chance of familiarizing with
+the entirety of the application as a birds-eye view.
+
+With an "italian sleight of hand" we can hide under the rug the
+header not found errors.  As `proteggi.c` and `newproteggi.c` means
+"protection", let's quickly skim thru them, and it seems they are
+the anti-cheat obfuscation for the game save file. Very interesting,
+but I decide I don't want to deal with them now.
+
+    willy@Thala  tabboz master$ git commit -m'Removing {new}proteggi.c'
+    [master 5595105] Removing {new}proteggi.c
+     3 files changed, 324 deletions(-)
+     delete mode 100644 Tabboz Simulator/C/newproteggi.c
+     delete mode 100644 Tabboz Simulator/C/proteggi.c
+    willy@Thala  tabboz master$ 
+
+We still have a missing `mmsystem.h`, but the comment tells us it's
+needed only for a single `sndPlaySound` function. By removing the
+include directive, we trade an "header not found" error for an
+"implicit declaration of function" warning. This is net positive,
+and a tradeoff we are going to massively exploit for the time being.
+
+For the time being, We are going to ignore all 'implicit declaration of
+functions' warnings, this will postpone recreating the API surface this
+application is dependent on until we will tackle linking errors.
+
+    willy@Thala  tabboz master$ git commit -m'Do not include mmsystem.h'
+    [master 3012736] Do not include mmsystem.h
+     1 file changed, 2 deletions(-)
+    willy@Thala  tabboz master$ 
+
+A great next step is to define every undeclared identifiers. First thing
+first, let's define `BOOL` and some macros to remove the Windows calling
+conventions annotations.
+
+    willy@Thala  tabboz master$ git commit -m'Define BOOL, argv, and undefine calling conventions'
+    [master c5dfd9d] Define BOOL, argv, and undefine calling conventions
+     Date: Sun Feb 10 15:49:06 2019 +0100
+     1 file changed, 15 insertions(+), 1 deletion(-)
+    willy@Thala  tabboz master$
+
+Then, we'll painstakingly define every undeclared identifiers, tediously
+forcing every unknown type to be an `int`, and declaring any global
+equal to a bogus value.
+
+Remember that the goal is only to make the code compile, and not to
+actually reimplement the Windows API. We can later decide the way we will
+cut the layer of abstractions.
+
+    willy@Thala  tabboz master$ git commit -m'Defining types, constants and globals'
+    [master b38d47e] Defining types, constants and globals
+     1 file changed, 90 insertions(+)
+    willy@Thala  tabboz master$ 
+
+While the `os.c` file as it stands now it looks rather silly, especially
+to people used to the real `windows.h`, we got a lot of valuable
+understanding of the codebase.
+
+We can see that, at least ignoring functions, the number of types we need
+is very manageable, and the names are the very usual ones we can find
+in any GUI API from the 90s.
+
+We also discover some undefined globals, that really scream like the
+linking point between the compiled UI resources and the C code.
+
+  * `hWndMain
+  * `hInst`
+  * `tipahDlg`
+  * `ps`
+
+Those should be our first thread to pull when trying to discover the
+entry point of the business logic.
+
+I have no experience working with Windows, nor with the original build
+tools used to write "Tabboz" (I can maybe suspect it was a Borland
+toolchain?) so, confirming our fuzzy goal of a text-based Swift version,
+I am going to take very liberal steps when converting the code.
+
+
+## Recovering Structure Shape
+
+At this stage, the only error class left to fix is "given type is not
+a structure or union". This is the reason why we forced every type to
+be `int`, as a result the clang compiler is again happily helping us
+highlight the fields we need to implement.
+
+Compiler errors have a bad reputation in our folklore, I think
+unjustifiably so. By carefully introducing errors, and mechanical
+refactorings, all the informations we have so far of the Tabboz codebase
+comes from naming and compiler errors. Not everything that is screaming
+red hurts you.
+
+As an example, let's use the `BITMAP` structure. Let's change the line
+
+    typedef int BITMAP;
+
+into
+
+    typedef struct {} BITMAP;
+
+now that `BITMAP` is actually a "class or union", clang will emit errors
+like
+
+    No member named 'bmWidth' in 'BITMAP'
+    No member named 'bmHeight' in 'BITMAP'
+
+and again, it is trivial to add the missing fields.
+
+    willy@Thala  tabboz master$ git commit -am'Declaring structures'
+    [master 2766f0d] Declaring structures
+     1 file changed, 34 insertions(+), 5 deletions(-)
+    willy@Thala  tabboz master$
+
+To my welcome surprise, this was all that was necessary to build our
+codebase!
 
