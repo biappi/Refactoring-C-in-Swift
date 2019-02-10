@@ -107,15 +107,36 @@ what kind of tamagotchi game we are talking about.
   * `Tabboz`, `Zarro` Being impartial, I will only quote the current Urban
     Dictionary definition:
 
-        The zarro, always uneducated, impolite and probably a fan
-        of soccer/football, loves to drive a scooter and goes around
-        with other zarri making noise, smoking pot and looking for
-        cocaine.
+    > The zarro, always uneducated, impolite and probably a fan
+    > of soccer/football, loves to drive a scooter and goes around
+    > with other zarri making noise, smoking pot and looking for
+    > cocaine.
 
   * `disco.c` Club
-  * 
-        
+  * `eventi.c` Events
+  * `lavoro.c` Job
+  * `scooter.c`
+  * `scuola.c` School
+  * `telefono.c` Mobile
+  * `tempo.c` Time
+  * `tipa.c` Girlfriend
+  * `vestiti.c` Clothing
 
-and for an Italian speaker, all the filenames clearly represent the
-different scenarios we remember from playing the game
-  
+As you can see, not only we are in for a treat, but let's look at how
+much did we gather from a single directory listing that easily fits a
+standard terminal. The structure of the distribution, what files contains
+which business logic, a small synopsis of the domain model of the
+application.
+
+A notable absent is any mention of "middleware" platforms, and no
+mention of a "patternized" architecture, suggesting the author chose its
+targeting platform wisely, and used it directly for his implementation,
+substantially reducing the amount of code to maintain for him, and to
+understand for us.
+
+In case you only speak English, my reader friend, let me tell you you are
+missing an entire universe of funny holy wars about when, how and why
+use what language for what filename, function or variable name, ask your
+nearest multi-lingual coder friend about it!
+
+
