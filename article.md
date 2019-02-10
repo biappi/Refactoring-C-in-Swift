@@ -425,10 +425,35 @@ To my welcome surprise, this was all that was necessary to build our
 codebase!
 
 
-## Using Xcode to check progress
+## Xcode Workflow
 
 As clang helped us with understanding how to build the code, so did Xcode
 in helping check our progress, so it's only fair I share the workflow i
 used.
 
 ![Main View](https://gist.githubusercontent.com/biappi/44b3627fc98358a56677aceb8102201e/raw/fc9372f4fae8c119647ca88f028b0297b1adb2ca/main-view.png)
+
+On the left side panel is setup to show all the errors, remembering that
+in Cocoa command-click in a discolsure triangle will collapse all its
+siblilngs, it should be easy to navigate the issue tree.
+
+The main editor contains `os.h`, and in the screenshot you can notice I
+reintroduced some errors for demonstration purposes, highlighted by the
+versioning control gutter.
+
+The assistant editor is used for reference and quick edits, like the one
+highlighted. To let clang continue emitting errors, we will use the
+`-ferror-limit=` cflags, as helpfully noted in the error output.
+
+So, let's try and reconstruct the `OPENFILENAME` struct.
+
+    1. Change the define from an int to an empty struct
+    2. Build
+    3. Notice the build errors on the left, option-click to reveal
+       the error in the assistant pane
+
+       ![Build Errors](https://gist.githubusercontent.com/biappi/44b3627fc98358a56677aceb8102201e/raw/79502cd967b9e6471c92d4f8bde9b9b5f68259c8/struct.png)
+
+    4. Copy and paste the fields from the call-site to the declaration site
+    5. Use whatever means of text editing (I suggest multi-cursors in this
+       case) to fix the syntax.
