@@ -1,8 +1,8 @@
 # Refactoring a C application into Swift 
 
-![Tabbozzo](Part 1 - Introduction/tabbozzo.png)
-![Logo](Part 1 - Introduction/tabboz-logo.png)
-![Panda](Part 1 - Introduction/panda.png)
+![Tabbozzo](Part%201%20-%20Introduction/tabbozzo.png)
+![Logo](Part%201%20-%20Introduction/tabboz-logo.png)
+![Panda](Part%201%20-%20Introduction/panda.png)
 
 This is a living documentation of my efforts of rewriting a Windows 32
 C application in Swift. It can be a fun project and I have not seen
@@ -35,10 +35,10 @@ you can browse the history or follow HEAD for a quick reference!
 
 ## Table of Contents
 
-**Part 1** - [Introduction](Part 1 - Introduction/README.md)
+**Part 1** - [Introduction](Part%201%20-%20Introduction/README.md)
 What's up with that 90s artstyle?
 
-**Part 2** - [Introduction](Part 2 - Zero To Build/README.md)
+**Part 2** - [Zero To Build](Part%202%20-%20Zero%20To%20Build/README.md)
 A commit-by-commit walkthrough on how to approach any legacy codebase
 
 
