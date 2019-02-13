@@ -374,7 +374,7 @@ As clang helped us with understanding how to build the code, so did Xcode
 in helping check our progress, so it's only fair I share the workflow i
 used.
 
-![Main View](https://gist.githubusercontent.com/biappi/44b3627fc98358a56677aceb8102201e/raw/fc9372f4fae8c119647ca88f028b0297b1adb2ca/main-view.png)
+![Main View](main-view.png)
 
 On the left side panel is setup to show all the errors, remembering that
 in Cocoa command-click in a discolsure triangle will collapse all its
@@ -395,7 +395,7 @@ So, let's try and reconstruct the `OPENFILENAME` struct.
   3. Notice the build errors on the left, option-click to reveal
      the error in the assistant pane
 
-       ![Build Errors](https://gist.githubusercontent.com/biappi/44b3627fc98358a56677aceb8102201e/raw/79502cd967b9e6471c92d4f8bde9b9b5f68259c8/struct.png)
+       ![Build Errors](struct.png)
 
   4. Copy and paste the fields from the call-site to the declaration site
   5. Use whatever means of text editing (I suggest multi-cursors in this
@@ -448,7 +448,7 @@ way Swift exposes C APIs using the Xcode editor autocomplete feature.
 Tabboz might now crash, but we are actually running it from Swift, and
 this is a much welcome and ironic sight:
 
-![Ironic sight](https://gist.github.com/biappi/44b3627fc98358a56677aceb8102201e/raw/2273dfd909569fcbe271c851cbdb04a60ee88e0a/irony.png)
+![Ironic sight](irony.png)
 
     willy@Thala  tabboz master$ git commit -am'Calling main entrypoint'
     [master 5dfcd7e] Calling main entrypoint
